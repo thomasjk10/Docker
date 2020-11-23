@@ -1,0 +1,52 @@
+version: '3'
+services:
+  python-app:
+    build:
+      context: ./docker/flask
+      dockerfile: Dockerfile #this is your dockerfile
+    container_name: python-app #docker container name
+    restart: unless-stopped
+    tty: true
+    environment:
+      SERVICE_NAME: app
+      SERVICE_TAGS: dev
+    working_dir: /
+    ports:
+      - "5000:80" #binding ports, external port : application listening port
+    volumes:
+      - ./in000031-batch_dashboard/docker/flask/:/var/www/html # after : its the location in the container OS
+    networks:
+      app-network:
+        ipv4_address: 172.20.0.2
+  angular-app:
+    build:
+      context: .
+      dockerfile: Dockerfile #this is your dockerfile
+    container_name: angular-app #docker container name
+    restart: unless-stopped
+    tty: true
+    environment:
+      SERVICE_NAME: app
+      SERVICE_TAGS: dev
+    working_dir: /
+    ports:
+      - "4201:80" #binding ports, external port : nginx listening port
+    volumes:
+      - ./in000031-batch_dashboard/:/var/www/html # after : its the location in the container OS
+    networks:
+      app-network:
+        ipv4_address: 172.20.0.3
+  
+
+#Docker Networks
+networks:
+  app-network:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+          - subnet: 172.20.0.0/16
+#Volumes
+volumes:
+  dbdata:
+    driver: local  
