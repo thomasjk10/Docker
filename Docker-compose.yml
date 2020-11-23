@@ -8,8 +8,6 @@ services:
         buildno: 1
     ports:
       - "5000:5000"
-    volumes:
-      - ./in000031-batch_dashboard/docker/flask/:/var/www/html # after : its the location in the container OS
   angular-app:
     build:
       context: .
@@ -18,5 +16,4 @@ services:
         buildno: 1
     ports:
       - "4201:80"
-    volumes:
-      - ./in000031-batch_dashboard/:/var/www/html # after : its the location in the container OS
+
