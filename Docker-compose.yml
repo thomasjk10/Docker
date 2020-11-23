@@ -6,7 +6,6 @@ services:
       dockerfile: Dockerfile
       args:
         buildno: 1
-    network_mode: "host"
     ports:
       - "5000:5000"
     volumes:
@@ -17,7 +16,6 @@ services:
       dockerfile: Dockerfile
       args:
         buildno: 1
-    network_mode: "host"
     ports:
       - "4201:80"
     volumes:
