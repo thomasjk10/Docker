@@ -1,0 +1,5 @@
+flask==1.1.2
+cx_Oracle
+pandas
+numpy
+flask_cors
